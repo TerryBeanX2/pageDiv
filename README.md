@@ -22,5 +22,5 @@
                     pageNumber: "h-"------------------每页样式
         }
     }
-
-![](https://raw.githubusercontent.com/TerryBeanX2/pageDiv/master/egImg/aaa.png)  
+```
+![img](https://github.com/TerryBeanX2/pageDiv/raw/master/egImg/aaa.png)
