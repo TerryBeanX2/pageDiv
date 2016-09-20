@@ -23,4 +23,4 @@
         }
     }
 
-![](https://github.com/TerryBeanX2/pageDiv/tree/master/egImg/aaa.png)  
+![](https://raw.githubusercontent.com/TerryBeanX2/pageDiv/master/egImg/aaa.png)  
