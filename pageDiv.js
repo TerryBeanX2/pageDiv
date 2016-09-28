@@ -28,6 +28,26 @@
     };
 
     pageDiv.prototype = {
+        getStyle: function (obj, attr) {    //获取非行间样式，obj是对象，attr是值
+            if (obj.currentStyle) {   //针对ie获取非行间样式
+                return obj.currentStyle[attr];
+            } else {
+                return getComputedStyle(obj, false)[attr];   //针对非ie
+            }
+        },
+        dataset: function (ele, name, val) {
+            this.canDataset = document.querySelector('body').dataset;
+            switch (arguments.length) {
+                case 2:
+                    return this.canDataset ? ele.dataset[name] : ele['data-' + name];
+                    break;
+                case 3:
+                    return this.canDataset ? ele.dataset[name] = val : ele['data-' + name] = val;
+                    break;
+                default:
+                    return;
+            }
+        },
         fixClassName: function () {
             window.pageDivObjNum = window.pageDivObjNum ? ++window.pageDivObjNum : 1;
             this.pageDivObjNum = window.pageDivObjNum;
@@ -135,22 +155,31 @@
                 this.show(document.querySelector('.' + this.option.classNames.ellipsis));
             }
             var arr = document.getElementsByClassName(this.option.classNames.pageNumber);
-            for (var i = 0, l = arr.length; i < l; i++) {
-                if (arr[i].dataset.page == this.option.activePage) {
-                    this.addClass(arr[i], 'active');
+            if(this.canDataset){
+                for (var i = 0, l = arr.length; i < l; i++) {
+                    if (this.dataset(arr[i], 'page') == this.option.activePage) {
+                        this.addClass(arr[i], 'active');
+                    }
+                }
+            }else{
+                for (var i = 0, l = arr.length; i < l; i++) {
+                    if (arr[i].innerText == this.option.activePage) {
+                        this.addClass(arr[i], 'active');
+                    }
                 }
             }
+
         },
         show: function (obj) {
-            if (obj.dataset.display) {
-                obj.style.display = obj.dataset.display;
-            } else {
-                obj.style.display = this.wrap.getElementsByTagName('li')[0].style.display;
+            if (!this.dataset(obj, 'display')) {
+                this.dataset(obj, 'display', this.getStyle(this.wrap.getElementsByTagName('li')[0],'display'));
             }
+            obj.style.display = this.dataset(obj, 'display')
         },
         hide: function (obj) {
+
             if (obj.style.display != 'none') {
-                obj.dataset.display = obj.style.display;
+                this.dataset(obj, 'display', obj.style.display);
             }
             obj.style.display = 'none';
         },
@@ -161,13 +190,14 @@
             this.removeClass(document.querySelector('.' + cla), actCla);
         },
         changePage: function (num, bool) {
+            if(this.option.activePage == num)return;
             if (this.option.reload) {
                 sessionStorage.setItem('page' + this.pageDivObjNum, JSON.stringify({
                     pageNum: num,
                     nowFirstNum: this.option.nowFirstNum
                 }));
             }
-            this.option.activePage = num;
+            this.option.activePage =num;
             if (this.callback && typeof this.callback == 'function') this.callback(num);
             var arr = this.ul.childNodes;
             for (var i = 0; i < arr.length; i++) {
@@ -227,4 +257,8 @@
     });
 
 })(this);
+
+
+
+
 

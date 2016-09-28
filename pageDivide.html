@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>分页插件</title>
-    <script src="pageDiv.js"></script>
 </head>
 <body>
 不使用刷新
@@ -12,10 +11,12 @@
 <div class="b"></div>
 使用刷新+回调函数
 <div class="c"></div>
+<script src="pageDiv.js"></script>
 <script>
     var bb = new pageDiv(1, {
         parent:'.a',
         totalNum: 26,
+        middle:true,
         perNum: 5
     });
 
