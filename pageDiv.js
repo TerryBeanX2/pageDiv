@@ -190,15 +190,16 @@
             this.removeClass(document.querySelector('.' + cla), actCla);
         },
         changePage: function (num, bool) {
-            if(this.option.activePage == num)return;
             if (this.option.reload) {
                 sessionStorage.setItem('page' + this.pageDivObjNum, JSON.stringify({
                     pageNum: num,
                     nowFirstNum: this.option.nowFirstNum
                 }));
             }
+            if(this.option.activePage != num){
+                if (this.callback && typeof this.callback == 'function') this.callback(num);
+            }
             this.option.activePage =num;
-            if (this.callback && typeof this.callback == 'function') this.callback(num);
             var arr = this.ul.childNodes;
             for (var i = 0; i < arr.length; i++) {
                 this.removeClass(arr[i], 'active');
