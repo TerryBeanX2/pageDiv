@@ -11,31 +11,34 @@
 <div class="b"></div>
 使用刷新+回调函数
 <div class="c"></div>
-<script src="pageDiv.js"></script>
-<script>
-    var bb = new pageDiv(1, {
-        parent:'.a',
-        totalNum: 26,
-        middle:true,
-        perNum: 5,
-        reload:false
-    });
+<script type="text/javascript" src="pageDiv.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var bb = new pageDiv(1, {
+            parent:'.a',
+            totalNum: 26,
+            middle:true,
+            perNum: 5,
+            reload:false
+        });
 
-    var cc = new pageDiv(11, {
-        parent:'.b',
-        totalNum: 11,
-        perNum: 5,
-        reload: true
-    });
+        var cc = new pageDiv(11, {
+            parent:'.b',
+            totalNum: 2,
+            perNum: 5,
+            reload: true
+        });
 
-    var aa = new pageDiv(22, {
-        parent:'.c',
-        totalNum: 28,
-        perNum: 5,
-        reload: true
-    }, function (num) {
-        window.location.reload();
-    });
+        var aa = new pageDiv(22, {
+            parent:'.c',
+            totalNum: 28,
+            perNum: 5,
+            reload: true
+        }, function (num) {
+            window.location.reload();
+        });
+    };
+
 
 //    var dd = new pageDiv('页码','配置对象','回调函数')
 //    配置对象:{
