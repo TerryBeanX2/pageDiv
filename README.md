@@ -9,12 +9,12 @@
         回调函数在页码变化时执行
 
 ```javascript
-    var dd = new pageDiv('页码','配置对象','回调函数fn(页码)')
-    配置对象:{
+    var dd = new pageDiv(initPage,confObject,callback(nowPage))
+    confObject:{
                 perNum: 5,----------------------------每页显示个数
                 totalNum: 20,-------------------------总共页数
                 parent: "body",-----------------------分页器容器
-                activePage: nowNum,-------------------当前页码（不必在对象里传，请传第一个参数即可）===============必须！
+                activePage: nowNum,-------------------初始页码（初始化时不必在confObject里传）
                 nowFirstNum: 0,-----------------------当前页签组第一个
                 reload: true,-------------------------是否会刷新页面，使用ajax时将其设为false，提高效率
                 classNames: {-------------------------样式类名,用于自定义样式
