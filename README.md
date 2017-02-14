@@ -4,12 +4,14 @@
         
         基于原生JS，直接引入即可使用，刷新页面也不需要另行传参，样式会自动改变。
         
-        所有参数中，只有第一个参数页码是必须的
+        所有参数中，只有第一个参数页码是必须的。
+        
+        回调函数在页码变化时执行(建议以实例化后赋予属性的方式传入回调，如：dd.callback = function(){})。
         
-        回调函数在页码变化时执行
-
 ```javascript
-    var dd = new pageDiv(initPage,confObject,callback(nowPage){})
+    var dd = new pageDiv(initPage,confObject,callback(nowPage){
+        // do sth
+    })
     confObject:{
                 perNum: 5,----------------------------每页显示个数
                 totalNum: 20,-------------------------总共页数
