@@ -126,7 +126,7 @@
             if (i > this.option.totalNum - this.option.totalNum % this.option.perNum) {
                 i = this.option.totalNum - this.option.perNum + 1
             }
-            if (i < 0) {
+            if (i <= 0) {
                 i = 1;
             }
             html += '<li class="' + this.option.classNames.firstPage + '"><a href="javascript:void(0)" ><span >首页</span></a></li>';
@@ -205,9 +205,9 @@
                     nowFirstNum: this.option.nowFirstNum
                 }));
             }
-            if (this.option.activePage != num) {
-                if (this.callback && typeof this.callback == 'function') this.callback(num);
-            }
+            // if (this.option.activePage != num) {
+            if (this.callback && typeof this.callback == 'function') this.callback(num);
+            // }
             this.option.activePage = num;
             var arr = this.ul.childNodes;
             for (var i = 0; i < arr.length; i++) {
