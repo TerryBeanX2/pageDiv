@@ -9,7 +9,7 @@
         回调函数在页码变化时执行
 
 ```javascript
-    var dd = new pageDiv(initPage,confObject,callback(nowPage))
+    var dd = new pageDiv(initPage,confObject,callback(nowPage){})
     confObject:{
                 perNum: 5,----------------------------每页显示个数
                 totalNum: 20,-------------------------总共页数
