@@ -1,5 +1,5 @@
 !(function (g) {
-    var pageDiv = function (nowNum, option, callback) {
+    var PageDiv = function (nowNum, option, callback) {
         this.option = {
             perNum: 5,
             totalNum: 20,
@@ -26,7 +26,7 @@
         this.initEvent();
     };
 
-    pageDiv.prototype = {
+    PageDiv.prototype = {
         getStyle: function (obj, attr) {    //获取非行间样式，obj是对象，attr是值
             if (obj.currentStyle) {   //针对ie获取非行间样式
                 return obj.currentStyle[attr];
@@ -260,10 +260,10 @@
         }
     };
 
-    Object.defineProperty(g, "pageDiv", {
+    Object.defineProperty(g, "PageDiv", {
         configurable: true,
         enumerable: true,
-        value: pageDiv
+        value: PageDiv
     });
 
 })(window);

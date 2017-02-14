@@ -14,7 +14,7 @@
 <script type="text/javascript" src="pageDiv.js"></script>
 <script type="text/javascript">
     window.onload = function () {
-        var bb = new pageDiv(1, {
+        var bb = new PageDiv(1, {
             parent:'.a',
             totalNum: 26,
             middle:true,
@@ -22,14 +22,14 @@
             reload:false
         });
 
-        var cc = new pageDiv(11, {
+        var cc = new PageDiv(11, {
             parent:'.b',
             totalNum: 2,
             perNum: 5,
             reload: true
         });
 
-        var aa = new pageDiv(22, {
+        var aa = new PageDiv(22, {
             parent:'.c',
             totalNum: 28,
             perNum: 5,
@@ -38,28 +38,6 @@
             window.location.reload();
         });
     };
-
-
-//    var dd = new pageDiv('页码','配置对象','回调函数')
-//    配置对象:{
-//                perNum: 5,----------------------------每页显示个数
-//                totalNum: 20,-------------------------总共页数
-//                parent: "body",-----------------------分页器容器
-//                activePage: nowNum,-------------------当前页码（不必在对象里传，请传第一个参数即可）===============必须！
-//                nowFirstNum: 0,-----------------------当前页签组第一个
-//                reload: false,------------------------是否会刷新页面
-//                classNames: {-------------------------样式类名,用于自定义样式
-//                    ul: "a-",
-//                    firstPage: "b-",
-//                    prePage: "c-",
-//                    ellipsisPre: "d-",
-//                    ellipsis: "e-",
-//                    nextPage: "f-",
-//                    lastPage: "g-",
-//                    pageNumber: "h-"
-//        }
-//    }
-
 </script>
 </body>
 </html>
