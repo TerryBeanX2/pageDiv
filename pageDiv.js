@@ -1,5 +1,5 @@
 !(function (g) {
-    var PageDiv = function (nowNum, option, callback) {
+    var pageDiv = function (nowNum, option, callback) {
         this.option = {
             perNum: 5,
             totalNum: 20,
@@ -26,7 +26,7 @@
         this.initEvent();
     };
 
-    PageDiv.prototype = {
+    pageDiv.prototype = {
         getStyle: function (obj, attr) {    //获取非行间样式，obj是对象，attr是值
             if (obj.currentStyle) {   //针对ie获取非行间样式
                 return obj.currentStyle[attr];
@@ -120,6 +120,7 @@
             }
         },
         refreshDom: function () {
+            var listNum = 0;
             this.ul.innerHTML = '';
             var html = '';
             var i = this.option.nowFirstNum;
@@ -134,16 +135,27 @@
             html += '<li class="' + this.option.classNames.ellipsisPre + '" style="display: none"><a href="javascript:void(0)">...</a></li>';
             for (var l = i + this.option.perNum; i < l; i++) {
                 if (i > this.option.totalNum) break;
+                listNum++;
                 html += '<li data-page="' + i + '" class="' + this.option.classNames.pageNumber + '"><a href="javascript:void(0)">' + i + '</a></li>'
             }
-            this.option.nowFirstNum = i - this.option.perNum;
+            if(listNum>=this.option.perNum){
+                this.option.nowFirstNum = i - this.option.perNum;
+            }
             html += '<li class="' + this.option.classNames.ellipsis + '" style="display: none"><a href="javascript:void(0)">...</a></li>';
             html += '<li class="' + this.option.classNames.nextPage + '"><a href="javascript:void(0)" ><span>&raquo;</span></a></li>';
             html += '<li class="' + this.option.classNames.lastPage + '"><a href="javascript:void(0)"><span>尾页</span></a></li>';
             this.ul.innerHTML = html;
-            this.active();
+            this.active(listNum);
         },
-        active: function () {
+        active: function (listNum) {
+            if(listNum<this.option.perNum){
+                this.option.nowFirstNum = this.option.nowFirstNum - (this.option.perNum-listNum);
+                if(this.option.nowFirstNum<0) {
+                    this.option.nowFirstNum=1;
+                }else{
+                    return this.refreshDom();
+                }
+            }
             this.option.activePage == 1 ? this.changeStyle(this.option.classNames.firstPage, 'lastBgEEE') : this.delStyle(this.option.classNames.firstPage, 'lastBgEEE');
             this.option.activePage == this.option.totalNum ? this.changeStyle(this.option.classNames.lastPage, 'lastBgEEE') : this.delStyle(this.option.classNames.lastPage, 'lastBgEEE');
             if (this.option.nowFirstNum == 1) {
@@ -177,6 +189,8 @@
             if (this.option.perNum >= this.option.totalNum) {
                 this.hide(document.querySelector('.' + this.option.classNames.ellipsisPre));
                 this.changeStyle(this.option.classNames.prePage, 'lastBgEEE');
+                this.changeStyle(this.option.classNames.nextPage, 'lastBgEEE');
+                this.hide(document.querySelector('.' + this.option.classNames.ellipsis));
             }
         },
         show: function (obj) {
@@ -213,9 +227,9 @@
             for (var i = 0; i < arr.length; i++) {
                 this.removeClass(arr[i], 'active');
             }
-            if (!bool) {
+            // if (!bool) {
                 this.refreshDom();
-            }
+            // }
             this.active();
         },
         _click: function (e) {
@@ -235,6 +249,7 @@
                     this.option.activePage = this.option.activePage - this.option.perNum;
                     this.option.activePage = this.option.activePage < 1 ? 1 : this.option.activePage;
                     num = this.option.activePage;
+                    console.log(this.option.activePage);
                     this.option.nowFirstNum -= this.option.perNum;
                     if (this.option.nowFirstNum <= 0) this.option.nowFirstNum = 1;
                     this.changePage(num);
@@ -260,10 +275,10 @@
         }
     };
 
-    Object.defineProperty(g, "PageDiv", {
+    Object.defineProperty(g, "pageDiv", {
         configurable: true,
         enumerable: true,
-        value: PageDiv
+        value: pageDiv
     });
 
 })(window);
