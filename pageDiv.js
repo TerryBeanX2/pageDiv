@@ -120,6 +120,9 @@
             }
         },
         refreshDom: function () {
+            if (this.option.activePage == 1) {
+                this.option.nowFirstNum = 1;
+            }
             var listNum = 0;
             this.ul.innerHTML = '';
             var html = '';
@@ -138,7 +141,7 @@
                 listNum++;
                 html += '<li data-page="' + i + '" class="' + this.option.classNames.pageNumber + '"><a href="javascript:void(0)">' + i + '</a></li>'
             }
-            if(listNum>=this.option.perNum){
+            if (listNum >= this.option.perNum) {
                 this.option.nowFirstNum = i - this.option.perNum;
             }
             html += '<li class="' + this.option.classNames.ellipsis + '" style="display: none"><a href="javascript:void(0)">...</a></li>';
@@ -148,11 +151,11 @@
             this.active(listNum);
         },
         active: function (listNum) {
-            if(listNum<this.option.perNum){
-                this.option.nowFirstNum = this.option.nowFirstNum - (this.option.perNum-listNum);
-                if(this.option.nowFirstNum<0) {
-                    this.option.nowFirstNum=1;
-                }else{
+            if (listNum < this.option.perNum) {
+                this.option.nowFirstNum = this.option.nowFirstNum - (this.option.perNum - listNum);
+                if (this.option.nowFirstNum <= 0) {
+                    this.option.nowFirstNum = 1;
+                } else {
                     return this.refreshDom();
                 }
             }
@@ -228,7 +231,7 @@
                 this.removeClass(arr[i], 'active');
             }
             // if (!bool) {
-                this.refreshDom();
+            this.refreshDom();
             // }
             this.active();
         },
